@@ -1,7 +1,9 @@
-const Card = ({ children }) => {
+const Card = ({ cssClass, children }) => {
     return (
         <div className="p-4 shadow rounded-lg">
-            {children}
+            <div className={cssClass}>
+                {children}
+            </div>
         </div>
     )
 }
