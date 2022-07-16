@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+import AddUser from './components/User/Add'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-  
+    <div className="App w-1/2 mx-auto">
+      <AddUser />
     </div>
   );
 }
