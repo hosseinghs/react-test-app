@@ -7,6 +7,7 @@ import Modal from "../UI/Modal";
 const AddUser = ({ onAddUser }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [error, setError] = useState(null);
 
   const nameHandler = (e) => {
     setName(e);
@@ -16,10 +17,25 @@ const AddUser = ({ onAddUser }) => {
     setAge(e);
   };
 
+  const modalVisibilityHandler = () => setError(null);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (name.trim().length === 0 || age.trim().length === 0) return;
-    if (+age < 1) return;
+    if (name.trim().length === 0 || age.trim().length === 0) {
+      setError({
+        title: "Invalid input",
+        message: "Please enter a valid name and age!",
+      });
+      return;
+    }
+
+    if (+age < 1) {
+      setError({
+        title: "Invalid age",
+        message: "Please enter a valid age!",
+      });
+      return;
+    }
     onAddUser({ name, age });
     setName("");
     setAge("");
@@ -65,7 +81,11 @@ const AddUser = ({ onAddUser }) => {
           </form>
         </div>
       </Card>
-      <Modal title="ops"></Modal>
+      {error && (
+        <Modal close={modalVisibilityHandler} title={error.title}>
+          {error.message}
+        </Modal>
+      )}
     </>
   );
 };
